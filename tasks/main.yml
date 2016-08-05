@@ -1,0 +1,4 @@
+---
+# New Relic role tasks
+
+- include: newRelic.yml

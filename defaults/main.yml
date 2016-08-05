@@ -1,0 +1,4 @@
+---
+newrelic_php: false
+newrelic_repo: 'deb http://apt.newrelic.com/debian/ newrelic non-free'
+newrelic_repo_key: "https://download.newrelic.com/548C16BF.gpg"

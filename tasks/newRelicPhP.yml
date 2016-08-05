@@ -1,0 +1,20 @@
+- name: Install newRelic PHP
+  apt:
+      name: newrelic-php5
+      state: latest
+      force: yes
+      update_cache: yes
+  notify:
+    - Restart newRelic
+    - Restart php_fpm
+
+- name: configure newRelic PHP
+  template:
+      src: newrelic_php_config
+      dest: /etc/php5/fpm/conf.d/20-newrelic.ini
+      mode: 0640
+      owner: root
+      group: newrelic
+  notify:
+    - Restart newRelic
+    - Restart php_fpm

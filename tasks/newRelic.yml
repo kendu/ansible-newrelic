@@ -1,0 +1,34 @@
+---
+# install new Relic monitoring software
+
+
+- name: Add newRelic repo
+  apt_repository:
+      repo: "{{ newrelic_repo }}"
+      state: present
+      mode: 0644
+
+- name: Add newRelic repo key
+  apt_key:
+      url: '{{ newrelic_repo_key }}'
+      state: present
+
+- name: Install newRelic
+  apt:
+      name: newrelic-sysmond
+      state: latest
+      force: yes
+      update_cache: yes
+  notify: Start newRelic
+
+- name: Configure newRelic
+  template:
+      src: newRelic_config
+      dest: /etc/newrelic/nrsysmond.cfg
+      mode: 0640
+      owner: root
+      group: newrelic
+  notify: Restart newRelic
+
+- include: newRelicPhP.yml
+  when: "{{ newrelic_php }}"

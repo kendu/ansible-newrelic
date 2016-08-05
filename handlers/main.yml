@@ -1,0 +1,19 @@
+---
+#NewRelic handlers
+- name: Restart newRelic
+  service:
+    name: newrelic-sysmond
+    state: restarted
+    enabled: yes
+
+- name: Start newRelic
+  service:
+    name: newrelic-sysmond
+    state: started
+    enabled: yes
+
+- name: Restart php_fpm
+  service:
+    name: php5-fpm
+    state: restarted
+    enabled: yes
